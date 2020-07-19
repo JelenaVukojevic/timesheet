@@ -1,0 +1,52 @@
+[
+    {
+        "id": 1,
+        "quote": "Be yourself; everyone else is already taken.",
+        "author": "Oscar Wilde"
+    },
+    {
+        "id": 2,
+        "quote": "Two things are infinite: the universe and human stupidity; and I'm not sure about the universe.",
+        "author": "Albert Einstein"
+    },
+    {
+        "id": 3,
+        "quote": "It is our choices, Harry, that show what we truly are, far more than our abilities.",
+        "author": "J.K. Rowling, Harry Potter and the Chamber of Secrets"
+    },
+    {
+        "id": 4,
+        "quote": "Great minds discuss ideas; average minds discuss events; small minds discuss people.",
+        "author": "Eleanor Roosevelt"
+    },
+    {
+        "id": 5,
+        "quote": "Have no fear of perfection, you’ll never reach it",
+        "author": "Salvador Dali"
+    },
+    {
+        "id": 6,
+        "quote": "I solemnly swear that I am up to no good.",
+        "author": "J.K. Rowling, Harry Potter and the Prisoner of Azkaban"
+    },
+    {
+        "id": 7,
+        "quote": "Imagination is the beginning of creation. You imagine what you desire, you will what you imagine, and at last, you create what you will.",
+        "author": "George Bernard Shaw"
+    },
+    {
+        "id": 8,
+        "quote": "The journey of a thousand miles begins with one step.",
+        "author": "Lao Tzu"
+    },
+    {
+        "id": 9,
+        "quote": "You must be the change you wish to see in the world.",
+        "author": "Gandhi"
+    },
+    {
+        "id": 10,
+        "quote": "Keep your face to the sunshine and you can never see the shadow.",
+        "author": "Helen Keller"
+    }
+]
