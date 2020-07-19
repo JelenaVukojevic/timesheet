@@ -16,7 +16,7 @@ class Timesheet extends React.Component {
         <Row className="header">
           <Row className="wrap">
             <span className="btn-icon">
-              <img className="icon icon-plus js-modal-init" src={iconPlus} al4t="Add New Item"/>
+              <img className="icon icon-plus js-modal-init" src={iconPlus} alt="Add New Item"/>
             </span>
             <div className="header-blockquote">
               <h1 className="header-quote">{quote.quote}</h1>
