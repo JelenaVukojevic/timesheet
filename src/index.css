@@ -93,8 +93,10 @@ body {
 	font-weight: 100;
 }
 
-.header-inner {
+.row.header-inner {
 	background-color: rgba(211, 67, 27, 0.5);
+	margin: 0;
+	width: 100%;
 }
 
 .header-inner .logo {
@@ -381,7 +383,12 @@ body {
 	box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.2);
 }
 
-.modal h2 {
+.modal-header {
+	background-color: #fff;
+	padding: 5px;
+}
+
+.modal .modal-title {
 	margin-top: 0;
 	margin-bottom: 1em;
 	color: #666;
@@ -395,11 +402,11 @@ body {
 }
 
 @media only screen and (max-width: 600px) {
-	.modal {
+	.modal-dialog {
 		padding: 30px 20px;
 	}
 
-	.modal h2 {
+	.modal .modal-title {
 		font-size: 20px;
 	}
 }
