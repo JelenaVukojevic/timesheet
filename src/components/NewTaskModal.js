@@ -37,14 +37,14 @@ class NewTaskModal extends React.Component {
                     <Modal.Header closeButton>
                         <Modal.Title>Create a task:</Modal.Title>
                     </Modal.Header>
-                    <Modal.Body className="modal js-modal-inner">
+                    <Modal.Body className="js-modal-inner">
                         <Form action="">
                             <Form.Group className="field-wrap">
                                 <Form.Label className="label" htmlFor="">Title:</Form.Label>
                                 <Form.Control className="field" type="text" id="" placeholder="Enter title here..." />
                             </Form.Group>
                             <Form.Group className="field-wrap">
-                                <Form.Label className="abel" htmlFor="">Hours:</Form.Label>
+                                <Form.Label className="label" htmlFor="">Hours:</Form.Label>
                                 <Form.Control className="field" type="text" id="" placeholder="Add hours here..." />
                             </Form.Group>
                             <Form.Group className="btn-wrap align-right">
