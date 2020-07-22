@@ -67,7 +67,7 @@ body {
 ## Header
 --------------------------------------------------------------*/
 .header {
-	padding-top: 40px;
+	padding-top: 20px;
 	background: #ed5928 url('./images/header-bg.jpg') no-repeat left bottom;
 	background-size: cover;
 }
@@ -75,7 +75,7 @@ body {
 .header-blockquote {
 	max-width: 520px;
 	margin-left: auto;
-	padding: 40px 0;
+	padding: 40px 0 10px;
 	text-align: right;
 }
 
@@ -83,13 +83,13 @@ body {
 	margin-top: 0;
 	margin-bottom: 0.5em;
 	color: #fff;
-	font-size: 46px;
+	font-size: 36px;
 	font-weight: 300;
 }
 
 .header-cite {
 	color: #fff;
-	font-size: 30px;
+	font-size: 26px;
 	font-weight: 100;
 }
 
@@ -318,6 +318,8 @@ body {
 	height: 20px;
 	margin-top: 10px;
 	border-bottom: 1px solid #999;
+	text-align: center;
+	line-height: 1;
 }
 
 .checkmark {
@@ -338,6 +340,13 @@ body {
 	stroke-width: 3px;
 	stroke-dashoffset: 30;
 	stroke-dasharray: 30;
+}
+
+.message {
+	width: 50%;
+	margin: 0 auto;
+	height: 100px;
+	text-align: center;
 }
 
 @media only screen and (max-width: 600px) {
