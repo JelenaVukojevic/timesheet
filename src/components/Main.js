@@ -1,21 +1,29 @@
 import React from 'react';
-import { Row } from 'react-bootstrap';
+import { Row, Form } from 'react-bootstrap';
 
 class Main extends React.Component {
     render() {
-        let tasks = <div className="message">No items for selected date</div>;
-        if (this.props.tasks != undefined) {
-            console.log(this.props.tasks)
+        let tasks = <div className="message">No items for selected date<br/><br/>Click on + icon to add item</div>;
+        let total = 0;
+        let totalRow = '';
+        if (this.props.tasks !== undefined) {
+            this.props.tasks.forEach((task) => {
+                total += task.hours;
+            })
             tasks = this.props.tasks.map((task) =>
-                <div className="item-row" key={task.title}>
+                <Row className="item-row" key={task.id}>
                     <div className="check-flag">
                         <span className="small-text-label">Title</span>
                         <span className="small-text-label hours">Hours</span>
                         <span className="check-flag-label">{task.title}</span>
                         <span className="hours-box">{task.hours}</span>
                     </div>
-                </div>
+                </Row>
             );
+            totalRow =  <Row className="total align-right">
+                            <Form.Label htmlFor="" className="total-label">Total:</Form.Label>
+                            <Form.Control className="total-input" type="text" value={total} readOnly />
+                        </Row>
         }
 
         return (
@@ -23,6 +31,7 @@ class Main extends React.Component {
                 <div className="wrap">
                     {tasks}
                 </div>
+                {totalRow}
             </Row>
         );
     }

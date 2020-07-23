@@ -1,7 +1,7 @@
 import React from 'react';
-import { Modal, Button, Form } from 'react-bootstrap';
+import { Modal } from 'react-bootstrap';
+import TaskForm from './TaskForm.js';
 import iconPlus from '../icons/icon-plus.svg';
-
 
 class NewTaskModal extends React.Component {
     constructor(props) {
@@ -38,21 +38,7 @@ class NewTaskModal extends React.Component {
                         <Modal.Title>Create a task:</Modal.Title>
                     </Modal.Header>
                     <Modal.Body className="js-modal-inner">
-                        <Form action="">
-                            <Form.Group className="field-wrap">
-                                <Form.Label className="label" htmlFor="">Title:</Form.Label>
-                                <Form.Control className="field" type="text" id="" placeholder="Enter title here..." />
-                            </Form.Group>
-                            <Form.Group className="field-wrap">
-                                <Form.Label className="label" htmlFor="">Hours:</Form.Label>
-                                <Form.Control className="field" type="text" id="" placeholder="Add hours here..." />
-                            </Form.Group>
-                            <Form.Group className="btn-wrap align-right">
-                                <Button variant="secondary" type="submit" onClick={() => this.handleClose()}>
-                                    Create
-                                </Button>
-                            </Form.Group>
-                        </Form>
+                        <TaskForm />
                     </Modal.Body>
                 </Modal>
             </div>

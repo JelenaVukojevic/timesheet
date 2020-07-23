@@ -8,10 +8,6 @@ import NewTaskModal from './NewTaskModal.js';
 class Header extends React.Component {
     render() {
         const quote = quotes[Math.floor(Math.random()*10)];
-        const date = new Date(this.props.date);
-        const day = date.getDate();
-        const month = date.getMonth() + 1;
-        const year = date.getFullYear();
 
         return(
             <Row className="header">
@@ -27,7 +23,7 @@ class Header extends React.Component {
                         <img className="logo" src={logo} alt="VegaIT"/>
                         <div className="date-wrap">
                         <img className="icon" src={iconCalendar} alt="Calendar"/>
-                        <time>{day} / {month} / {year}</time>
+                        <time>{this.props.date}</time>
                         </div>
                     </div>
                 </Row>

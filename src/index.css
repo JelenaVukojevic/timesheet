@@ -252,9 +252,10 @@ body {
 /*--------------------------------------------------------------
 ## Checkflag Item
 --------------------------------------------------------------*/
-.item-row {
+.item-row.row {
 	margin: 20px 0;
 	position: relative;
+	display: block;
 }
 
 .check-flag {
@@ -281,7 +282,7 @@ body {
 	right: 37px;
 }
 
-.total {
+.total,row {
 	float: left;
 	width: 100%;
 	padding-right: 20px;
@@ -394,14 +395,20 @@ body {
 	font-weight: 300;
 }
 
-.modal .btn-secondary {
+.modal .btn-primary {
 	width: 100%;
 	background-color: #fa3d1b;
 	border: none;
 }
 
-.modal .btn-secondary:hover {
+.modal .btn-primary:hover,
+.modal .btn-primary:disabled {
 	background-color: #fc5638;
+}
+
+.modal .error {
+	color: #f00;
+	margin-bottom: 0.5rem;
 }
 
 @media only screen and (max-width: 600px) {
