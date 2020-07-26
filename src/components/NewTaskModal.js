@@ -11,6 +11,7 @@ class NewTaskModal extends React.Component {
         };
         this.handleShow = this.handleShow.bind(this);
         this.handleClose = this.handleClose.bind(this);
+        this.saveTask = this.saveTask.bind(this);
     }
 
     handleShow() {
@@ -19,6 +20,11 @@ class NewTaskModal extends React.Component {
 
     handleClose() {
         this.setState({show: false});
+    }
+
+    saveTask(data) {
+        this.props.save(data);
+        this.setState({ show: false });
     }
 
     render() {
@@ -38,7 +44,7 @@ class NewTaskModal extends React.Component {
                         <Modal.Title>Create a task:</Modal.Title>
                     </Modal.Header>
                     <Modal.Body className="js-modal-inner">
-                        <TaskForm />
+                        <TaskForm saveTask={this.saveTask}/>
                     </Modal.Body>
                 </Modal>
             </div>

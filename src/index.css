@@ -83,13 +83,13 @@ body {
 	margin-top: 0;
 	margin-bottom: 0.5em;
 	color: #fff;
-	font-size: 36px;
+	font-size: 30px;
 	font-weight: 300;
 }
 
 .header-cite {
 	color: #fff;
-	font-size: 26px;
+	font-size: 22px;
 	font-weight: 100;
 }
 
@@ -131,7 +131,7 @@ body {
 	display: -ms-flexbox;
 	display: flex;
 	align-items: center;
-	padding: 35px 0;
+	padding: 20px 0;
 }
 
 .date-wrap time {
@@ -163,6 +163,8 @@ body {
 	padding: 20px 0;
 	background-color: #333;
 	text-align: center;
+	position: sticky;
+	bottom: 0;
 }
 
 .footer .copy {
@@ -408,7 +410,7 @@ body {
 
 .modal .error {
 	color: #f00;
-	margin-bottom: 0.5rem;
+	margin: 0.5rem 0;
 }
 
 @media only screen and (max-width: 600px) {

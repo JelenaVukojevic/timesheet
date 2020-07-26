@@ -12,7 +12,7 @@ class Header extends React.Component {
         return(
             <Row className="header">
                 <Row className="wrap">
-                    <NewTaskModal />
+                    <NewTaskModal save={this.props.save} tasks={this.props.tasks} />
                     <div className="header-blockquote">
                         <h1 className="header-quote">{quote.quote}</h1>
                         <div className="header-cite">- {quote.author}</div>

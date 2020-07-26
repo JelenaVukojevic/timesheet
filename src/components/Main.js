@@ -11,7 +11,7 @@ class Main extends React.Component {
                 total += task.hours;
             })
             tasks = this.props.tasks.map((task) =>
-                <Row className="item-row" key={task.id}>
+                <Row className="item-row" key={task.title}>
                     <div className="check-flag">
                         <span className="small-text-label">Title</span>
                         <span className="small-text-label hours">Hours</span>

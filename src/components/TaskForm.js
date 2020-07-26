@@ -2,9 +2,11 @@ import React from 'react';
 import { Form, Button } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 
-export default function TaskForm() {
-    const { register, handleSubmit, watch, errors, formState } = useForm();
-    const onSubmit = data => console.log(data);
+export default function TaskForm(props) {
+    const { register, handleSubmit, watch, errors } = useForm();
+    const onSubmit = data => {props.saveTask(data)};
+    const watchTitle = watch("title");
+    const watchHours = watch("hours");
 
     return(
         <Form action="" onSubmit={handleSubmit(onSubmit)}>
@@ -16,26 +18,42 @@ export default function TaskForm() {
                     name="title" 
                     id="" 
                     placeholder="Enter title here..." 
+                    area-invalid={errors.title ? "true" : "false"}
                     ref={ register({ required: true }) } 
                 />
+                {errors.title && (<p className="error">Field Title is required</p>)}
             </Form.Group>
             <Form.Group className="field-wrap">
                 <Form.Label className="label" htmlFor="">Hours:</Form.Label>
                 <Form.Control 
                     className="field"
-                    type="text"
+                    type="number"
                     name="hours"
                     id=""
+                    step="0.05"
                     placeholder="Add hours here..."
-                    ref={ register({ required: true }) } 
+                    area-invalid={errors.hours ? "true" : "false"}
+                    ref={ 
+                        register({ 
+                            required: true,
+                            pattern: /[0-9].[0-9]{2}/
+                        }) 
+                    } 
                 />
+                {errors.hours?.type === 'required' && <p className="error">Field Hours is required</p>}
+                {errors.hours?.type === 'pattern' && <p className="error">Field Hours can contain numbers</p>}
             </Form.Group>
-            {errors.title && <p className="error">Title is required</p>}
-            {errors.hours && <p className="error">Hours is required</p>}
             <Form.Group className="btn-wrap align-right">
-                <Button variant="primary" type="submit" disabled={!formState.isValid} >
-                    Create
-                </Button>
+                {(!!watchTitle && !!watchHours) && (
+                    <Button variant="primary" type="submit"  >
+                        Create
+                    </Button>
+                )}
+                {(!watchTitle || !watchHours) && (
+                    <Button variant="primary" type="submit" disabled={true}>
+                        Create
+                    </Button>
+                )}
             </Form.Group>
         </Form>
     );
