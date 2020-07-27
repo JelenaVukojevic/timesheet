@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 
 export default function TaskForm(props) {
     const { register, handleSubmit, watch, errors } = useForm();
-    const onSubmit = data => {props.saveTask(data)};
+    const onSubmit = data => {props.saveTask(data.title, data.hours)};
     const watchTitle = watch("title");
     const watchHours = watch("hours");
 
@@ -36,7 +36,7 @@ export default function TaskForm(props) {
                     ref={ 
                         register({ 
                             required: true,
-                            pattern: /[0-9].[0-9]{2}/
+                            pattern: /[0-9]||[0-9].[0-9]{2}/
                         }) 
                     } 
                 />

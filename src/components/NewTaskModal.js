@@ -22,8 +22,8 @@ class NewTaskModal extends React.Component {
         this.setState({show: false});
     }
 
-    saveTask(data) {
-        this.props.save(data);
+    saveTask(title, hours) {
+        this.props.addTask(this.props.date, title, hours);
         this.setState({ show: false });
     }
 

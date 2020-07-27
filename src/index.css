@@ -167,6 +167,11 @@ body {
 	bottom: 0;
 }
 
+.footer.row {
+	display: block;
+	flex-wrap: nowrap;
+}
+
 .footer .copy {
 	display: block;
 	color: #fff;
@@ -261,30 +266,53 @@ body {
 }
 
 .check-flag {
-	display: -webkit-box;
-	display: -webkit-flex;
-	display: -ms-flexbox;
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
 	padding: 40px 30px 30px;
 	transition: 350ms ease-in-out;
 	box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
 }
 
+.check-flag:hover {
+	background-color: #f9f9f9;
+}
+
+.check-flag .icons-visible {
+	visibility: visible;
+}
+
+.check-flag .icons-hidden {
+	visibility: hidden;
+}
+
+.check-flag-label {
+	color: #666;
+	font-size: 25px;
+	font-weight: 300;
+}
+
+.check-flag .icon {
+	width: 20px;
+}
+
+.check-flag .icon:hover {
+	width: 25px;
+}
+
 .small-text-label {
-	position: absolute;
-	top: 10px;
 	color: #999;
 	text-transform: uppercase;
 	font-size: 11px;
 }
 
-.small-text-label.hours {
-	right: 37px;
+.hours-box {
+	width: 50px;
+	height: 20px;
+	margin-top: 10px;
+	border-bottom: 1px solid #999;
+	text-align: center;
+	line-height: 1;
 }
 
-.total,row {
+.total.row {
 	float: left;
 	width: 100%;
 	padding-right: 20px;
@@ -304,25 +332,6 @@ body {
 	font-weight: bold;
 	width: 50px;
 	text-align: center;
-}
-
-.check-flag:hover {
-	background-color: #f9f9f9;
-}
-
-.check-flag-label {
-	color: #666;
-	font-size: 25px;
-	font-weight: 300;
-}
-
-.hours-box {
-	width: 50px;
-	height: 20px;
-	margin-top: 10px;
-	border-bottom: 1px solid #999;
-	text-align: center;
-	line-height: 1;
 }
 
 .checkmark {
@@ -347,7 +356,7 @@ body {
 
 .message {
 	width: 50%;
-	margin: 0 auto;
+	margin: 20px auto 0;
 	height: 100px;
 	text-align: center;
 }
