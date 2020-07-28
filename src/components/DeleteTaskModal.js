@@ -4,6 +4,7 @@ import { Modal, Button } from 'react-bootstrap';
 export default function DeleteTaskModal(props) {
     return(
         <Modal 
+            id="deleteTask"
             show={props.show}
             onHide={props.handleClose}
             keyboard={false}

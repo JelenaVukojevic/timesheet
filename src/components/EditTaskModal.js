@@ -5,6 +5,7 @@ import TaskForm from './TaskForm.js';
 export default function EditTaskModal(props) {
     return (
         <Modal 
+            id="editTask"
             show={props.show}
             onHide={props.handleClose}
             keyboard={false}
@@ -15,7 +16,7 @@ export default function EditTaskModal(props) {
                 <Modal.Title>Edit task:</Modal.Title>
             </Modal.Header>
             <Modal.Body className="js-modal-inner">
-                <TaskForm saveTask={props.editTask}/>
+                <TaskForm saveTask={props.editTask} edit={true} close={props.handleClose} />
             </Modal.Body>
         </Modal>
     );

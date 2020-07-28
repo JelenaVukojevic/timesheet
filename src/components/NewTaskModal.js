@@ -34,6 +34,7 @@ class NewTaskModal extends React.Component {
                     <img className="icon icon-plus js-modal-init" src={iconPlus} alt="Add New Item"/>
                 </span>
                 <Modal 
+                    id="newTask"
                     show={this.state.show}
                     onHide={this.handleClose}
                     keyboard={false}
@@ -44,7 +45,7 @@ class NewTaskModal extends React.Component {
                         <Modal.Title>Create a task:</Modal.Title>
                     </Modal.Header>
                     <Modal.Body className="js-modal-inner">
-                        <TaskForm saveTask={this.saveTask}/>
+                        <TaskForm saveTask={this.saveTask} edit={false} />
                     </Modal.Body>
                 </Modal>
             </div>
