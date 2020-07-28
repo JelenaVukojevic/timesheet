@@ -36,25 +36,44 @@ export default function TaskForm(props) {
                     ref={ 
                         register({ 
                             required: true,
-                            pattern: /[0-9]||[0-9].[0-9]{2}/
+                            pattern: /^[0-9]+(\.[0-9]{2})?/
                         }) 
                     } 
                 />
                 {errors.hours?.type === 'required' && <p className="error">Field Hours is required</p>}
                 {errors.hours?.type === 'pattern' && <p className="error">Field Hours can contain numbers</p>}
             </Form.Group>
-            <Form.Group className="btn-wrap align-right">
-                {(!!watchTitle && !!watchHours) && (
-                    <Button variant="primary" type="submit"  >
-                        Create
+            {!props.edit && (
+                <Form.Group className="btn-wrap align-right">
+                    {(!!watchTitle && !!watchHours) && (
+                        <Button variant="primary" type="submit"  >
+                            Create
+                        </Button>
+                    )}
+                    {(!watchTitle || !watchHours) && (
+                        <Button variant="primary" type="submit" disabled={true}>
+                            Create
+                        </Button>
+                    )}
+                </Form.Group>
+            )}
+            {props.edit && (
+                <Form.Group className="btn-wrap align-right">
+                    <Button variant="secondary" onClick={props.close} >
+                        Cancel
                     </Button>
-                )}
-                {(!watchTitle || !watchHours) && (
-                    <Button variant="primary" type="submit" disabled={true}>
-                        Create
-                    </Button>
-                )}
-            </Form.Group>
+                    {(!!watchTitle && !!watchHours) && (
+                        <Button variant="primary" type="submit" >
+                            Save
+                        </Button>
+                    )}
+                    {(!watchTitle || !watchHours) && (
+                        <Button variant="primary" type="submit" disabled={true}>
+                            Save
+                        </Button>
+                    )}
+                </Form.Group>
+            )}
         </Form>
     );
 }

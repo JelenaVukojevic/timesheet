@@ -29,7 +29,7 @@ class Main extends React.Component {
         }));
     }
 
-    handleEditModalShow() {
+    handleEditModalShow(task) {
         this.setState({ editModalShow: true });
     }
 
