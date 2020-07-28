@@ -1,5 +1,8 @@
 import React from 'react';
-import { Row, Form, Col } from 'react-bootstrap';
+import { Row, Form, Col, Container } from 'react-bootstrap';
+import moment from 'moment';
+import API from '../api'
+
 import EditTaskModal from './EditTaskModal';
 import DeleteTaskModal from './DeleteTaskModal';
 
@@ -21,6 +24,18 @@ class Main extends React.Component {
         this.handleDeleteModalShow = this.handleDeleteModalShow.bind(this);
         this.handleDeleteModalClose = this.handleDeleteModalClose.bind(this);
         this.deleteTask = this.deleteTask.bind(this);
+    }
+    
+    componentDidMount() {
+        let urlDate = window.location.pathname.substr(1)
+        let date = (urlDate) ? 
+                    moment(urlDate, 'DD-MM-YYYY').format("DD/MM/YYYY") : 
+                    moment().format('DD/MM/YYYY');
+        API.get()
+            .then(res => {
+            this.props.getTasks(res)
+            })
+            .catch(() => console.log('error'));
     }
     
     handleHover(){
@@ -100,20 +115,20 @@ class Main extends React.Component {
         }
         if(this.props.tasksCount === 0) {
             return (
-                <Row className="message">
+                <Container className="message">
                     No items for selected date<br/><br/>Click on + icon to add item
-                </Row>
+                </Container>
             )
         } else {
             return (
-                <Row className="main">
-                    <div className="wrap">
+                <Container className="main">
+                    <section className="wrap">
                         {tasks}
-                    </div>
-                    <Row className="total align-right">
+                    </section>
+                    <section className="total align-right">
                         <Form.Label htmlFor="" className="total-label">Total:</Form.Label>
                         <Form.Control className="total-input" type="text" value={total} readOnly />
-                    </Row>
+                    </section>
                     <EditTaskModal 
                         show={this.state.editModalShow}
                         handleClose={this.handleEditModalClose}
@@ -124,7 +139,7 @@ class Main extends React.Component {
                         handleClose={this.handleDeleteModalClose}
                         deleteTask={this.deleteTask}
                     />
-                </Row>
+                </Container>
             );
         }
     }

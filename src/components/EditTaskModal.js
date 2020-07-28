@@ -1,6 +1,6 @@
 import React from 'react';
 import { Modal } from 'react-bootstrap';
-import TaskForm from './TaskForm.js';
+import TaskForm from './TaskForm';
 
 export default function EditTaskModal(props) {
     return (
