@@ -6,7 +6,7 @@ import iconCalendar from '../icons/icon-calendar.svg'
 import logo from '../images/vegait-logo.svg'
 import quotes from './data/quotes.json'
 
-import NewTaskModal from './NewTaskModal.js'
+import NewTaskModal from './NewTaskModal'
 
 import moment from 'moment'
 

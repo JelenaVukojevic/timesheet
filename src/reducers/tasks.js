@@ -1,4 +1,5 @@
 import {
+    GET_TASKS,
     ADD_TASK,
     EDIT_TASK,
     DELETE_TASK
@@ -21,10 +22,15 @@ const initialState = initialTasks;
 const urlDate = window.location.pathname.substr(1)
 const date = (urlDate) ? 
       moment(urlDate, 'DD-MM-YYYY').format("DD/MM/YYYY") : 
-      moment().format('DD/MM/YYYY')
+      moment().format('DD/MM/YYYY');
 
 export default function tasks(state = initialState, action) {
     switch (action.type) {
+        case GET_TASKS:
+            return [
+                ...state
+            ]
+
         case ADD_TASK:
             return [
                 ...state
