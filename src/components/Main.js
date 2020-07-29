@@ -1,7 +1,7 @@
 import React from 'react';
 import { Row, Form, Col, Container } from 'react-bootstrap';
 import moment from 'moment';
-import API from '../api'
+import API from '../api/api'
 
 import EditTaskModal from './EditTaskModal';
 import DeleteTaskModal from './DeleteTaskModal';
@@ -29,10 +29,13 @@ class Main extends React.Component {
     componentDidMount() {
         let urlDate = window.location.pathname.substr(1)
         let date = (urlDate) ? 
-                    moment(urlDate, 'DD-MM-YYYY').format("DD/MM/YYYY") : 
-                    moment().format('DD/MM/YYYY');
-        API.get()
-            .then(res => {
+                    moment(urlDate, 'DD-MM-YYYY').format('DD-MM-YYYY') : 
+                    moment().format('DD-MM-YYYY');
+        API.get('', {
+            params:{
+                date: date
+            }
+        }).then(res => {
             this.props.getTasks(res)
             })
             .catch(() => console.log('error'));
