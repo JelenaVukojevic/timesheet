@@ -1,14 +1,14 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React from 'react'
+import ReactDOM from 'react-dom'
 
 import './index.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/css/bootstrap.min.css'
 
-import { Provider } from 'react-redux';
-import { createStore } from 'redux';
-import reducers from './reducers';
+import { Provider } from 'react-redux'
+import { createStore } from 'redux'
+import reducers from './reducers'
 
-import App from './App.js';
+import App from './App.js'
 
 const store = createStore(reducers)
 

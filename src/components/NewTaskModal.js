@@ -1,7 +1,9 @@
-import React from 'react';
-import { Modal } from 'react-bootstrap';
-import TaskForm from './TaskForm';
-import iconPlus from '../icons/icon-plus.svg';
+import React from 'react'
+import { Modal } from 'react-bootstrap'
+
+import TaskForm from './TaskForm'
+
+import iconPlus from '../icons/icon-plus.svg'
 
 class NewTaskModal extends React.Component {
     constructor(props) {
@@ -22,8 +24,9 @@ class NewTaskModal extends React.Component {
         this.setState({show: false});
     }
 
-    saveTask(title, hours) {
-        this.props.addTask(this.props.date, title, hours);
+    saveTask(data) {
+        console.log('save');
+        this.props.addTask(this.props.date, data.title, data.hours);
         this.setState({ show: false });
     }
 

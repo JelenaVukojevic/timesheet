@@ -326,12 +326,11 @@ body {
 }
 
 .total-input {
-	color: #999;
 	border-bottom: 1px solid #999;
-	font-size: 14px;
 	font-weight: bold;
 	width: 50px;
 	text-align: center;
+	display: inline-block;
 }
 
 .checkmark {

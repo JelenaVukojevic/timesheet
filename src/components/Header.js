@@ -1,14 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Row } from 'react-bootstrap'
+import moment from 'moment'
+
+import NewTaskModal from './NewTaskModal'
 
 import iconCalendar from '../icons/icon-calendar.svg'
 import logo from '../images/vegait-logo.svg'
 import quotes from './data/quotes.json'
-
-import NewTaskModal from './NewTaskModal'
-
-import moment from 'moment'
 
 const quote = quotes[Math.floor(Math.random()*10)]
 const urlDate = window.location.pathname.substr(1)
@@ -19,7 +18,7 @@ const date = (urlDate) ?
 const Header = ({ addTask }) => (
     <Row className="header">
         <Row className="wrap">
-            <NewTaskModal addTask={addTask} date={date} />
+            <NewTaskModal addTask={addTask} date={moment(date, 'DD/MM/YYYY').format("DD-MM-YYYY")} />
             <div className="header-blockquote">
                 <h1 className="header-quote">{quote.quote}</h1>
                 <div className="header-cite">- {quote.author}</div>

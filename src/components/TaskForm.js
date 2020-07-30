@@ -1,10 +1,12 @@
-import React from 'react';
-import { Form, Button } from 'react-bootstrap';
-import { useForm } from 'react-hook-form';
+import React from 'react'
+import { Form, Button } from 'react-bootstrap'
+import { useForm } from 'react-hook-form'
 
 export default function TaskForm(props) {
-    const { register, handleSubmit, watch, errors } = useForm();
-    const onSubmit = data => {props.saveTask(data.title, data.hours)};
+    const { register, handleSubmit, watch, errors } = useForm({mode: "onChange"});
+    const onSubmit = data => {
+        props.saveTask(data);
+    };
     const watchTitle = watch("title");
     const watchHours = watch("hours");
 
@@ -18,6 +20,7 @@ export default function TaskForm(props) {
                     name="title" 
                     id="" 
                     placeholder="Enter title here..." 
+                    defaultValue={props.task ? props.task.title : ''}
                     area-invalid={errors.title ? "true" : "false"}
                     ref={ register({ required: true }) } 
                 />
@@ -27,21 +30,22 @@ export default function TaskForm(props) {
                 <Form.Label className="label" htmlFor="">Hours:</Form.Label>
                 <Form.Control 
                     className="field"
-                    type="number"
+                    type="text"
                     name="hours"
                     id=""
                     step="0.05"
-                    placeholder="Add hours here..."
+                    placeholder="Add hours here... (Example: 5.5)"
+                    defaultValue={props.task ? props.task.hours : ''}
                     area-invalid={errors.hours ? "true" : "false"}
                     ref={ 
                         register({ 
                             required: true,
-                            pattern: /^[0-9]+(\.[0-9]{2})?/
+                            pattern: /^[0-9]+(\.[0-9]+)?$/
                         }) 
                     } 
                 />
                 {errors.hours?.type === 'required' && <p className="error">Field Hours is required</p>}
-                {errors.hours?.type === 'pattern' && <p className="error">Field Hours can contain numbers</p>}
+                {errors.hours?.type === 'pattern' && <p className="error">Field Hours can contain only numbers</p>}
             </Form.Group>
             {!props.edit && (
                 <Form.Group className="btn-wrap align-right">

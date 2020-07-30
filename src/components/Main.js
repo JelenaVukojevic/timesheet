@@ -1,10 +1,10 @@
-import React from 'react';
-import { Row, Form, Col, Container } from 'react-bootstrap';
-import moment from 'moment';
+import React from 'react'
+import { Row, Col, Container } from 'react-bootstrap'
+import moment from 'moment'
 import API from '../api/api'
 
-import EditTaskModal from './EditTaskModal';
-import DeleteTaskModal from './DeleteTaskModal';
+import EditTaskModal from './EditTaskModal'
+import DeleteTaskModal from './DeleteTaskModal'
 
 import iconEdit from '../icons/icon-edit.svg'
 import iconDelete from '../icons/icon-delete.svg'
@@ -15,7 +15,9 @@ class Main extends React.Component {
         this.state = {
             isHovered: false,
             editModalShow: false,
-            editDeleteModal: false
+            deleteModalShow: false,
+            task: {},
+            id: ''
         };
         this.handleHover = this.handleHover.bind(this);
         this.handleEditModalShow = this.handleEditModalShow.bind(this);
@@ -47,7 +49,10 @@ class Main extends React.Component {
     }
 
     handleEditModalShow(task) {
-        this.setState({ editModalShow: true });
+        this.setState({ 
+            editModalShow: true,
+            task: task
+        });
     }
 
     handleEditModalClose() {
@@ -56,12 +61,17 @@ class Main extends React.Component {
         });
     }
 
-    editTask() {
-        console.log('edit');
+    editTask(data) {
+        console.log('edit')
+        this.props.editTask(data);
+        this.handleEditModalClose();
     }
 
-    handleDeleteModalShow() {
-        this.setState({ deleteModalShow: true });
+    handleDeleteModalShow(id) {
+        this.setState({ 
+            deleteModalShow: true,
+            id: id
+        });
     }
 
     handleDeleteModalClose() {
@@ -70,52 +80,13 @@ class Main extends React.Component {
         });
     }
 
-    deleteTask() {
-        console.log('delete')
-        this.setState({ deleteModalShow: false });
+    deleteTask(id) {
+        this.props.deleteTask(id);
+        this.handleDeleteModalClose();
     }
 
     render() {
-        let total = 0;
-        let tasks;
-        console.log(this.props)
-        if (this.props.tasks !== undefined) {
-            this.props.tasks.forEach((task) => {
-                total += parseFloat(task.hours);
-            })
-            tasks = this.props.tasks.map((task) =>
-                <Row 
-                    className="item-row" 
-                    key={task.id}
-                    onMouseEnter={this.handleHover}
-                    onMouseLeave={this.handleHover}
-                >
-                    <Row className="check-flag">
-                        <Col sm={10}>
-                            <p className="small-text-label">Title</p>
-                            <p className="check-flag-label">{task.title}</p>
-                        </Col>
-                        <Col sm={1}>
-                            <p className="small-text-label hours">Hours</p>
-                            <p className="hours-box">{task.hours}</p>
-                        </Col>
-                        <Col sm={1} className={this.state.isHovered ? "icons-visible" : "icons-hidden"}>
-                            <img 
-                                className="icon" 
-                                src={iconEdit} 
-                                alt="Edit" 
-                                onClick={this.handleEditModalShow} />
-                            <br/>
-                            <img 
-                                className="icon" 
-                                src={iconDelete} 
-                                alt="Delete" 
-                                onClick={this.handleDeleteModalShow} />
-                        </Col>
-                    </Row>
-                </Row>
-            );
-        }
+        // console.log(this.props)
         if(this.props.tasksCount === 0) {
             return (
                 <Container className="message">
@@ -126,21 +97,55 @@ class Main extends React.Component {
             return (
                 <Container className="main">
                     <section className="wrap">
-                        {tasks}
+                        {this.props.tasks.map((task) =>
+                            <Row 
+                                className="item-row" 
+                                key={task.id}
+                                onMouseEnter={this.handleHover}
+                                onMouseLeave={this.handleHover}
+                            >
+                                <Row className="check-flag">
+                                    <Col sm={10}>
+                                        <p className="small-text-label">Title</p>
+                                        <p className="check-flag-label">{task.title}</p>
+                                    </Col>
+                                    <Col sm={1}>
+                                        <p className="small-text-label hours">Hours</p>
+                                        <p className="hours-box">{task.hours}</p>
+                                    </Col>
+                                    <Col sm={1} className={this.state.isHovered ? "icons-visible" : "icons-hidden"}>
+                                        <img 
+                                            className="icon" 
+                                            src={iconEdit} 
+                                            alt="Edit" 
+                                            onClick={() => this.handleEditModalShow(task)} />
+                                        <br/>
+                                        <img 
+                                            className="icon" 
+                                            src={iconDelete} 
+                                            alt="Delete" 
+                                            onClick={() => this.handleDeleteModalShow(task.id)} />
+                                    </Col>
+                                </Row>
+                            </Row>
+                        )}
                     </section>
                     <section className="total align-right">
-                        <Form.Label htmlFor="" className="total-label">Total:</Form.Label>
-                        <Form.Control className="total-input" type="text" value={total} readOnly />
+                        <p className="total-label">Total:</p>
+                        <p><span className="total-input">{this.props.total}</span></p>
                     </section>
                     <EditTaskModal 
                         show={this.state.editModalShow}
                         handleClose={this.handleEditModalClose}
                         editTask={this.editTask}
+                        task={this.state.task}
+                        total={this.props.total}
                     />
                     <DeleteTaskModal 
                         show={this.state.deleteModalShow}
                         handleClose={this.handleDeleteModalClose}
                         deleteTask={this.deleteTask}
+                        id={this.state.id}
                     />
                 </Container>
             );

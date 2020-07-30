@@ -5,7 +5,7 @@ import {
     DELETE_TASK
 } from '../constants/ActionTypes'
 
-// import moment from 'moment';
+// import moment from 'moment'
 
 // const urlDate = window.location.pathname.substr(1)
 // const date = (urlDate) ? 
@@ -15,7 +15,11 @@ import {
 export default function tasks(state = [], action) {
     switch (action.type) {
         case GET_TASKS:
-            return state.concat(action.tasks)
+            return state.concat(action.payload)
+            // return action.payload.map(task => 
+            //     state.push(task)
+                
+            // )
             
         case ADD_TASK:
             return [
