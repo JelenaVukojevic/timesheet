@@ -36,9 +36,8 @@ class Main extends React.Component {
                 date: date
             }
         }).then(res => {
-            this.props.getTasks(res)
-            })
-            .catch(() => console.log('error'));
+            this.props.getTasks(res.data)
+        }).catch(() => console.log('error'));
     }
     
     handleHover(){
@@ -79,9 +78,10 @@ class Main extends React.Component {
     render() {
         let total = 0;
         let tasks;
+        console.log(this.props)
         if (this.props.tasks !== undefined) {
             this.props.tasks.forEach((task) => {
-                total += task.hours;
+                total += parseFloat(task.hours);
             })
             tasks = this.props.tasks.map((task) =>
                 <Row 
