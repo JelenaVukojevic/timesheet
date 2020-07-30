@@ -35,7 +35,9 @@ class Main extends React.Component {
                     moment().format('DD-MM-YYYY');
         API.get('', {
             params:{
-                date: date
+                date: date,
+                action: 'getTasks',
+                api_key: process.env.REACT_APP_API_KEY
             }
         }).then(res => {
             this.props.getTasks(res.data)
@@ -62,7 +64,6 @@ class Main extends React.Component {
     }
 
     editTask(data) {
-        console.log('edit')
         this.props.editTask(data);
         this.handleEditModalClose();
     }
@@ -81,12 +82,19 @@ class Main extends React.Component {
     }
 
     deleteTask(id) {
-        this.props.deleteTask(id);
+        API.get('', {
+            params:{
+                id: id,
+                action: 'deleteTask',
+                api_key: process.env.REACT_APP_API_KEY
+            }
+        }).then(res => {
+            this.props.deleteTask(id);
+        }).catch(() => console.log('error'));
         this.handleDeleteModalClose();
     }
 
     render() {
-        // console.log(this.props)
         if(this.props.tasksCount === 0) {
             return (
                 <Container className="message">
@@ -94,6 +102,10 @@ class Main extends React.Component {
                 </Container>
             )
         } else {
+            let total = 0;
+            this.props.tasks.forEach(task => { 
+                total += parseFloat(task.hours);
+            })
             return (
                 <Container className="main">
                     <section className="wrap">
@@ -132,7 +144,7 @@ class Main extends React.Component {
                     </section>
                     <section className="total align-right">
                         <p className="total-label">Total:</p>
-                        <p><span className="total-input">{this.props.total}</span></p>
+                        <p><span className="total-input">{total}</span></p>
                     </section>
                     <EditTaskModal 
                         show={this.state.editModalShow}

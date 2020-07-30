@@ -1,5 +1,6 @@
 import React from 'react'
 import { Modal } from 'react-bootstrap'
+import API from '../api/api' 
 
 import TaskForm from './TaskForm'
 
@@ -25,9 +26,23 @@ class NewTaskModal extends React.Component {
     }
 
     saveTask(data) {
-        console.log('save');
-        this.props.addTask(this.props.date, data.title, data.hours);
-        this.setState({ show: false });
+        API.get('', {
+            params:{
+                date: this.props.date,
+                title: data.title,
+                hours: data.hours,
+                action: 'addTask',
+                api_key: process.env.REACT_APP_API_KEY
+            }
+        }).then(res => {
+            if(!res.data) {
+                alert('Max number of hours in a day is ' + process.env.REACT_APP_HOURS_IN_DAY)
+            } else {
+                data.id = res.data;
+                this.props.addTask(data);
+                this.setState({ show: false });
+            }
+        }).catch(() => console.log('error'));
     }
 
     render() {
