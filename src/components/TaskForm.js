@@ -5,6 +5,7 @@ import { useForm } from 'react-hook-form'
 export default function TaskForm(props) {
     const { register, handleSubmit, watch, errors } = useForm({mode: "onChange"});
     const onSubmit = data => {
+        if(props.edit) data.id = props.task.id; 
         props.saveTask(data);
     };
     const watchTitle = watch("title");

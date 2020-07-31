@@ -19,6 +19,12 @@ class Main extends React.Component {
             task: {},
             id: ''
         };
+
+        this.urlDate = window.location.pathname.substr(1)
+        this.date = (this.urlDate) ? 
+                    moment(this.urlDate, 'DD-MM-YYYY').format('DD-MM-YYYY') : 
+                    moment().format('DD-MM-YYYY');
+
         this.handleHover = this.handleHover.bind(this);
         this.handleEditModalShow = this.handleEditModalShow.bind(this);
         this.handleEditModalClose = this.handleEditModalClose.bind(this);
@@ -28,14 +34,11 @@ class Main extends React.Component {
         this.deleteTask = this.deleteTask.bind(this);
     }
     
+
     componentDidMount() {
-        let urlDate = window.location.pathname.substr(1)
-        let date = (urlDate) ? 
-                    moment(urlDate, 'DD-MM-YYYY').format('DD-MM-YYYY') : 
-                    moment().format('DD-MM-YYYY');
         API.get('', {
             params:{
-                date: date,
+                date: this.date,
                 action: 'getTasks',
                 api_key: process.env.REACT_APP_API_KEY
             }
@@ -64,7 +67,18 @@ class Main extends React.Component {
     }
 
     editTask(data) {
-        this.props.editTask(data);
+        API.get('', {
+            params:{
+                date: this.date,
+                id: data.id,
+                title: data.title,
+                hours: data.hours,
+                action: 'editTask',
+                api_key: process.env.REACT_APP_API_KEY
+            }
+        }).then(res => {
+            this.props.editTask(data);
+        }).catch(() => console.log('error'));
         this.handleEditModalClose();
     }
 
