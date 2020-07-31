@@ -14,7 +14,6 @@ export default function tasks(state = [], action) {
             return state.concat(action.payload);
 
         case EDIT_TASK:
-            console.log(action.payload)
             return state.map(task =>
                 task.id === action.payload.id ?
                 { ...task, title: action.payload.title, hours: action.payload.hours } :

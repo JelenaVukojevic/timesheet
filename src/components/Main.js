@@ -1,31 +1,22 @@
 import React from 'react'
-import { Row, Col, Container } from 'react-bootstrap'
-import moment from 'moment'
+import { Container } from 'react-bootstrap'
 import API from '../api/api'
 
 import EditTaskModal from './EditTaskModal'
 import DeleteTaskModal from './DeleteTaskModal'
-
-import iconEdit from '../icons/icon-edit.svg'
-import iconDelete from '../icons/icon-delete.svg'
+import Task from './Task'
+import { date } from './data/date'
 
 class Main extends React.Component {
     constructor(){
         super();
         this.state = {
-            isHovered: false,
             editModalShow: false,
             deleteModalShow: false,
             task: {},
             id: ''
         };
 
-        this.urlDate = window.location.pathname.substr(1)
-        this.date = (this.urlDate) ? 
-                    moment(this.urlDate, 'DD-MM-YYYY').format('DD-MM-YYYY') : 
-                    moment().format('DD-MM-YYYY');
-
-        this.handleHover = this.handleHover.bind(this);
         this.handleEditModalShow = this.handleEditModalShow.bind(this);
         this.handleEditModalClose = this.handleEditModalClose.bind(this);
         this.editTask = this.editTask.bind(this);
@@ -34,25 +25,6 @@ class Main extends React.Component {
         this.deleteTask = this.deleteTask.bind(this);
     }
     
-
-    componentDidMount() {
-        API.get('', {
-            params:{
-                date: this.date,
-                action: 'getTasks',
-                api_key: process.env.REACT_APP_API_KEY
-            }
-        }).then(res => {
-            this.props.getTasks(res.data)
-        }).catch(() => console.log('error'));
-    }
-    
-    handleHover(){
-        this.setState(prevState => ({
-            isHovered: !prevState.isHovered
-        }));
-    }
-
     handleEditModalShow(task) {
         this.setState({ 
             editModalShow: true,
@@ -69,7 +41,7 @@ class Main extends React.Component {
     editTask(data) {
         API.get('', {
             params:{
-                date: this.date,
+                date: date,
                 id: data.id,
                 title: data.title,
                 hours: data.hours,
@@ -77,9 +49,13 @@ class Main extends React.Component {
                 api_key: process.env.REACT_APP_API_KEY
             }
         }).then(res => {
-            this.props.editTask(data);
+            if(!res.data) {
+                alert('Max number of hours in a day is ' + process.env.REACT_APP_HOURS_IN_DAY)
+            } else {
+                this.props.editTask(data);
+                this.handleEditModalClose();
+            }
         }).catch(() => console.log('error'));
-        this.handleEditModalClose();
     }
 
     handleDeleteModalShow(id) {
@@ -104,8 +80,8 @@ class Main extends React.Component {
             }
         }).then(res => {
             this.props.deleteTask(id);
+            this.handleDeleteModalClose();
         }).catch(() => console.log('error'));
-        this.handleDeleteModalClose();
     }
 
     render() {
@@ -124,36 +100,12 @@ class Main extends React.Component {
                 <Container className="main">
                     <section className="wrap">
                         {this.props.tasks.map((task) =>
-                            <Row 
-                                className="item-row" 
+                            <Task 
                                 key={task.id}
-                                onMouseEnter={this.handleHover}
-                                onMouseLeave={this.handleHover}
-                            >
-                                <Row className="check-flag">
-                                    <Col sm={10}>
-                                        <p className="small-text-label">Title</p>
-                                        <p className="check-flag-label">{task.title}</p>
-                                    </Col>
-                                    <Col sm={1}>
-                                        <p className="small-text-label hours">Hours</p>
-                                        <p className="hours-box">{task.hours}</p>
-                                    </Col>
-                                    <Col sm={1} className={this.state.isHovered ? "icons-visible" : "icons-hidden"}>
-                                        <img 
-                                            className="icon" 
-                                            src={iconEdit} 
-                                            alt="Edit" 
-                                            onClick={() => this.handleEditModalShow(task)} />
-                                        <br/>
-                                        <img 
-                                            className="icon" 
-                                            src={iconDelete} 
-                                            alt="Delete" 
-                                            onClick={() => this.handleDeleteModalShow(task.id)} />
-                                    </Col>
-                                </Row>
-                            </Row>
+                                task={task}
+                                handleEditModalShow={this.handleEditModalShow}
+                                handleDeleteModalShow={this.handleDeleteModalShow}
+                            />
                         )}
                     </section>
                     <section className="total align-right">
