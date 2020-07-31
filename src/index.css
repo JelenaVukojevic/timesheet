@@ -360,21 +360,6 @@ body {
 	text-align: center;
 }
 
-@media only screen and (max-width: 600px) {
-	.check-flag {
-		padding: 30px 20px 20px;
-	}
-
-	.check-flag-label {
-		font-size: 15px;
-	}
-
-	.small-text-label.hours {
-		right: 25px;
-	}
-}
-
-
 /*--------------------------------------------------------------
 ## Modal
 --------------------------------------------------------------*/
@@ -420,6 +405,10 @@ body {
 	margin: 0.5rem 0;
 }
 
+.modal button:disabled {
+	cursor: not-allowed;
+}
+
 #newTask .btn-primary {
 	width: 100%;
 }
@@ -445,14 +434,4 @@ body {
 #editTask .btn,
 #deleteTask .btn {
 	padding: 5px 60px;
-}
- 
-@media only screen and (max-width: 600px) {
-	.modal-dialog {
-		padding: 30px 20px;
-	}
-
-	.modal-title {
-		font-size: 20px;
-	}
 }

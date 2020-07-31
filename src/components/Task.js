@@ -11,22 +11,30 @@ class Task extends React.Component {
             isHovered: false,
         };
 
-        this.handleHover = this.handleHover.bind(this);
+        this.handleMouseEnter = this.handleMouseEnter.bind(this);
+        this.handleMouseLeave = this.handleMouseLeave.bind(this);
     }
     
 
-    handleHover(){
-        this.setState(prevState => ({
-            isHovered: !prevState.isHovered
-        }));
+    handleMouseEnter(){
+        this.setState({
+            isHovered: true
+        });
+    }
+
+    handleMouseLeave(){
+        this.setState({
+            isHovered: false
+        });
     }
 
     render() {
+        console.log(this.state.isHovered);
         return (
             <Row 
                 className="item-row" 
-                onMouseEnter={this.handleHover}
-                onMouseLeave={this.handleHover}
+                onMouseEnter={this.handleMouseEnter}
+                onMouseLeave={this.handleMouseLeave}
             >
                 <Row className="check-flag">
                     <Col sm={10}>
